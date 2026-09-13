@@ -1,8 +1,8 @@
-# obzorarr-docker (engels74)
+# Obzorarr Docker Image (Nightly)
 
 ## For full documentation
 
-Detailed information and documentation available on the [master branch README](https://github.com/edbfi/obzorarr-docker/tree/master).
+Installation instructions, Docker Compose examples and published image tags are available in the [Obzorarr container documentation](https://web.edb.fi/containers/obzorarr/).
 
 
 ## Building and publishing
