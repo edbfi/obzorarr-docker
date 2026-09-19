@@ -2,6 +2,8 @@
 # SPDX-License-Identifier: GPL-3.0-only
 import json, subprocess, sys, time, uuid
 from pathlib import Path
+import shutil, signal
+signal.signal(signal.SIGTERM, lambda *_: sys.exit(143))
 image=sys.argv[1]
 root=Path(sys.argv[2]).resolve(); root.mkdir(parents=True,exist_ok=True)
 arch=sys.argv[3]
@@ -59,9 +61,18 @@ try:
  result['passed']=True
  (root/'result.txt').write_text('PASS: native HTTP/version/migrations/UID/persistence/restart/replacement/clean shutdown\n')
 finally:
- logs=docker('logs',name,check=False)
- log=root/(volume+'.log');log.write_text(logs);log.chmod(0o600)
- docker('stop','--time','15',name,check=False)
- docker('rm',name,check=False)
- (root/'runtime-result.json').write_text(json.dumps(result,indent=2))
+ try:
+  docker('stop','--time','15',name,check=False)
+  docker('rm','-f','-v',name,check=False)
+  docker('volume','rm',volume,check=False)
+  assert not docker('container','ls','-a','--filter','name=^/'+name+'$','--format','{{.Names}}'), 'container survived cleanup'
+  assert volume not in docker('volume','ls','--format','{{.Name}}').splitlines(), 'volume survived cleanup'
+  result['cleanup_passed']=True
+ finally:
+  for backup in root.glob(name+'-backup'):
+   shutil.rmtree(backup)
+  for log in root.glob(name+'*.log'):
+   log.unlink()
+  (root/'runtime-result.json').write_text(json.dumps(result,indent=2))
+
 print(json.dumps(result,indent=2))

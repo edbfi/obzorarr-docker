@@ -28,3 +28,13 @@ must be reviewed with fresh checksums and native CI before publication.
 This migration updates nightly first. Stable 0.1.11 and the historical PR channel
 are retained separately. Their legacy workflows remain disabled pending migration;
 do not merge channel branches wholesale or relabel nightly as stable.
+
+## Runtime fixture cleanup
+
+Native amd64/arm64 CI uses disposable state and local container networking. Its
+always-running aggregate requires both image jobs and hygiene. Runtime cleanup
+removes the test containers, volumes and networks, checks their absence, and
+deletes generated keys and database backups. Runner cancellation enters the same
+cleanup path. Artifacts use an explicit allowlist: raw logs, databases and secret
+files are never uploaded. Live media services and VPN paths remain outside this
+fixture's coverage.
