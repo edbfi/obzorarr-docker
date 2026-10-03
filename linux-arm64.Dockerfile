@@ -48,6 +48,7 @@ COPY --from=builder /build/build "${APP_DIR}/build"
 COPY --from=builder /build/drizzle "${APP_DIR}/drizzle"
 COPY --from=production-dependencies /build/node_modules "${APP_DIR}/node_modules"
 COPY --from=builder /build/package.json "${APP_DIR}/package.json"
+COPY --from=builder /build/scripts/serve.ts "${APP_DIR}/scripts/serve.ts"
 
 RUN mkdir -p "${CONFIG_DIR}/data" && \
     rm -rf "${APP_DIR}/data" && ln -s "${CONFIG_DIR}/data" "${APP_DIR}/data" && \
