@@ -1,4 +1,4 @@
-name: call-build
+name: build-nightly
 
 on:
   workflow_dispatch:
