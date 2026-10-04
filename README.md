@@ -19,7 +19,7 @@ Pushes to `nightly` also build the image on GitHub runners: `.github/workflows/b
 calls the reusable workflow in `edbfi/base-image`, which builds linux/amd64 and linux/arm64,
 smoke-tests each architecture using `test_url`, `test_amd64` and `test_arm64` from `meta.json`,
 and publishes the images to `ghcr.io/edbfi/obzorarr-docker`. The caller is kept identical to the
-one in `edbfi/base-image`, so it runs on a push to any branch except `workflows` and the
+one in `edbfi/base-image` apart from its file name and `name`, so it runs on a push to any branch except `workflows` and the
 published tags are named after the branch. `./build.sh` stays for local builds.
 
 Stable 0.1.11 and the historical PR channel are retained separately. Their legacy
