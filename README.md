@@ -25,8 +25,9 @@ arguments, and the Dockerfiles verify the source archive against `source_sha256`
 Pushes to `nightly` build and publish the image on GitHub runners: `.github/workflows/build-nightly.yml`
 calls the reusable workflow in `edbfi/base-image`, which builds linux/amd64 and linux/arm64,
 smoke-tests each architecture using `test_url`, `test_amd64` and `test_arm64` from `meta.json`,
-and publishes the images to `ghcr.io/edbfi/obzorarr-docker` with `nightly` tags. Only pushes to
-`nightly` (or a manual run) start it; pushes to other branches build and publish nothing.
+and publishes the images to `ghcr.io/edbfi/obzorarr-docker` with `nightly` tags. Pushes to other
+branches start nothing. A manual run (`workflow_dispatch`) builds and publishes the branch it is
+started on, with tags named after that branch, so start it only on `nightly`.
 `./build.sh` stays for local builds.
 
 Stable 0.1.11 and the historical PR channel are retained separately. Their legacy
