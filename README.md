@@ -1,14 +1,8 @@
-# Obzorarr Docker image — retained release channel
+# Obzorarr Docker Image (Release)
 
-This branch retains historical packaging. Its legacy build and update workflows
-are disabled. The maintained build channel is `nightly`; do not treat a nightly
-image as a stable release.
+## For full documentation
 
-For current installation instructions, Docker Compose examples and published
-image tags, use the [Obzorarr container documentation](https://web.edb.fi/containers/obzorarr/)
-and the [maintained nightly README](https://github.com/edbfi/obzorarr-docker/blob/nightly/README.md).
-The historical Compose example has been removed to avoid recommending obsolete
-image names and runtime settings.
+Installation instructions, Docker Compose examples and published image tags are available in the [Obzorarr container documentation](https://web.edb.fi/containers/obzorarr/).
 
 ## Environment variables
 
@@ -17,6 +11,12 @@ Set `ORIGIN` to the address people open in the browser, for example `ORIGIN=http
 Behind a reverse proxy, set `ADDRESS_HEADER=x-forwarded-for` (and `XFF_DEPTH` to the number of proxies, default `1`) only when every request goes through that proxy, so the app sees the real client address. `PROTOCOL_HEADER` and `HOST_HEADER` are for setups without `ORIGIN`, behind a trusted proxy.
 
 `SHUTDOWN_TIMEOUT` is the number of seconds the app waits for open requests when the container stops. The image sets `5` so a plain `docker stop` (10 s) finishes cleanly; if you raise it, raise the stop timeout too (`docker stop -t`, `stop_grace_period`).
+
+## Building
+
+Images are built and published by the Hotio workflows in `edbfi/base-image`. `.github/workflows/call-build.yml` runs on every push (except to a branch named `workflows`) and builds linux/amd64 and linux/arm64, smoke-tests each architecture on `test_url` (`test_amd64`, `test_arm64`), then publishes `ghcr.io/edbfi/obzorarr-docker:<branch>`, `<branch>-<commit>` and `<branch>-<version>` (for a release version also `latest` and `<branch>-v<major>`, `<branch>-v<major>.<minor>` and `<branch>-v<version>`). `.github/workflows/call-update.yml` runs hourly: it evaluates the `__command` keys in `meta.json` (the latest obzorarr release tag as `version`, the current `alpinevpn` base image as `upstream_tag_sha`) and commits any change, which triggers a new build. The `nightly` branch builds the latest `main` commit the same way.
+
+To build locally, run `./build.sh amd64` or `./build.sh arm64` from the repository root (needs `docker` and `jq`); `./build.sh update` refreshes `meta.json` the way the hourly workflow does.
 
 ## License
 
