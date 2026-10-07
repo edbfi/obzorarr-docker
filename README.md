@@ -4,6 +4,10 @@
 
 Installation instructions, Docker Compose examples and published image tags are available in the [Obzorarr container documentation](https://web.edb.fi/containers/obzorarr/).
 
+## Releases
+
+The release channel follows the app's latest published, non-prerelease GitHub Release with a plain `X.Y.Z` tag (release titles may say `v`). Publish only an owner-approved, tested commit from `main`; never move a published tag. A bare tag does not publish anything.
+
 ## Environment variables
 
 Set `ORIGIN` to the address people open in the browser, for example `ORIGIN=http://192.168.1.10:3000` (in Compose, `- ORIGIN=http://192.168.1.10:3000`). It is **required when serving plain HTTP**: without it Obzorarr assumes `https://<Host>`, so signing in and saving changes fail. Leave it unset only behind an HTTPS reverse proxy that passes the original `Host`. It must be a bare origin (no path, query or credentials), or the app does not start.
