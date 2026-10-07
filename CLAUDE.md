@@ -8,7 +8,10 @@ Packaging-only repo for the `obzorarr` Docker image; no application source. Both
 download `https://github.com/edbfi/obzorarr/archive/${VERSION}.tar.gz` at build time, so
 app behaviour changes belong upstream, not here.
 
-This is the `release` branch: it builds the latest obzorarr release tag (now `0.1.11`).
+This is the `release` branch: it builds obzorarr's latest published, non-prerelease GitHub
+Release with a plain `X.Y.Z` tag (now `0.1.11`; `version__command` reads `releases/latest`, so a
+bare tag publishes nothing). Publish a backport release with "Set as the latest release"
+unchecked, or `release` moves back to that version.
 `call-build` builds and publishes every push to this branch (it skips only a branch named
 `workflows`, so use that name for PR branches), and the hourly `call-update` bumps `meta.json`
 and pushes, which builds again. `origin/nightly` builds the latest obzorarr `main` commit with
@@ -18,8 +21,9 @@ Change both channels together: callers, `build.sh`, `.gitignore`, Dockerfiles an
 the same on `release` and `nightly`. They differ only in `meta.json`'s channel values
 (`description`, `latest`, `version`, `version__command`) and, until obzorarr publishes its first
 SvelteKit 3 release, in release's `scripts/serve.ts*` wildcard copy and `bun start` run file
-(`0.1.11` has no `scripts/serve.ts`). `release` also carries `README.md` details, `pullfrog.yml`
-and this file (`git diff origin/nightly release`). The `pr` channel branch keeps an older layout
+(`0.1.11` has no `scripts/serve.ts`). `release` also carries `README.md` details, and only
+`release` has `pullfrog.yml`, `immortality.yml`, `AGENTS.md` and this file
+(`git diff origin/nightly release`). The `pr` channel branch keeps an older layout
 and carries its own `update-versions.sh`.
 
 ## Commands
