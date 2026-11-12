@@ -1,4 +1,17 @@
-# Obzorarr Docker Image (Release)
+<p align="center">
+  <img src="docs/assets/obzorarr-docker-logo.svg" alt="obzorarr-docker logo" width="256" height="256">
+</p>
+<h1 align="center">obzorarr-docker</h1>
+<p align="center"><strong>Multi-architecture Docker packaging for Obzorarr</strong></p>
+<p align="center">
+  <a href="https://github.com/edbfi/obzorarr-docker/blob/release/LICENSE"><img src="https://img.shields.io/badge/packaging_license-GPL--3.0-blue?style=flat" alt="Docker packaging license: GPL-3.0"></a>
+  <a href="https://github.com/moby/moby" title="Docker Engine source (Moby)"><img src="https://img.shields.io/badge/Docker-2496ED?style=flat&amp;logo=docker&amp;logoColor=white" alt="Docker"></a>
+  <a href="https://git.savannah.gnu.org/cgit/bash.git/" title="GNU Bash source"><img src="https://img.shields.io/badge/Bash-4EAA25?style=flat&amp;logo=gnubash&amp;logoColor=white" alt="Bash"></a>
+</p>
+
+<!-- Logo copied verbatim from https://github.com/edbfi/repo-patches/blob/cf9cf0d625c8c7b02982c6453d899c1c2c0fb1a6/hweb-content/assets/img/image-logos/obzorarr.svg -->
+
+<p align="center">Release channel</p>
 
 ## For full documentation
 
