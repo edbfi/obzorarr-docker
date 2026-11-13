@@ -7,6 +7,7 @@
   <a href="https://github.com/edbfi/obzorarr-docker/blob/release/LICENSE"><img src="https://img.shields.io/badge/packaging_license-GPL--3.0-blue?style=flat" alt="Docker packaging license: GPL-3.0"></a>
   <a href="https://github.com/moby/moby" title="Docker Engine source (Moby)"><img src="https://img.shields.io/badge/Docker-2496ED?style=flat&amp;logo=docker&amp;logoColor=white" alt="Docker"></a>
   <a href="https://git.savannah.gnu.org/cgit/bash.git/" title="GNU Bash source"><img src="https://img.shields.io/badge/Bash-4EAA25?style=flat&amp;logo=gnubash&amp;logoColor=white" alt="Bash"></a>
+  <a href="https://github.com/edbfi/obzorarr-docker/actions/workflows/call-build.yml?query=branch%3Arelease"><img src="https://img.shields.io/github/actions/workflow/status/edbfi/obzorarr-docker/call-build.yml?branch=release&amp;event=push&amp;label=CI&amp;style=flat" alt="CI"></a>
 </p>
 
 Docker packaging for [Obzorarr](https://github.com/edbfi/obzorarr).
